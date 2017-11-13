@@ -42,6 +42,9 @@ namespace TechJobsConsole
                     {
                         List<string> results = JobData.FindAll(columnChoice);
 
+                        //Sort List
+                        results.Sort();
+
                         Console.WriteLine("\n*** All " + columnChoices[columnChoice] + " Values ***");
                         foreach (string item in results)
                         {
@@ -61,10 +64,20 @@ namespace TechJobsConsole
                     List<Dictionary<string, string>> searchResults;
 
                     // Fetch results
-                    if (columnChoice.Equals("all"))
-                    {
-                        Console.WriteLine("Search all fields not yet implemented.");
+
+                    //FindByValue Method Call 
+                    if (columnChoices.ContainsKey(columnChoice))
+                    { 
+                        searchResults = JobData.FindByValue(searchTerm);
+                        PrintJobs(searchResults);
                     }
+                    /*1st version
+                     if (columnChoice.Equals("all"))
+                     {
+                        searchResults =JobData.FindByValue(searchTerm);
+                        PrintJobs(searchResults);
+                     }
+                     */
                     else
                     {
                         searchResults = JobData.FindByColumnAndValue(columnChoice, searchTerm);
@@ -118,7 +131,38 @@ namespace TechJobsConsole
 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            Console.WriteLine("printJobs is not implemented yet");
+            // choice 'no result' or not
+            if (someJobs.Count == 0)
+            {
+                Console.WriteLine("No Results");
+            }
+            else
+            {
+                Console.WriteLine("{0} Results Found\n", someJobs.Count);
+                //print List of Jobs outer loop
+                foreach (Dictionary<string, string> job in someJobs)
+                
+                //print each job's details via its Key and Value
+                    foreach (KeyValuePair<string, string> item in job)
+                    {
+                        Console.WriteLine(item.Key + ":" + item.Value);
+                    }
+                    Console.WriteLine("\n*****");
+             }
+                /*
+                foreach (Dictionary<string, string> jobOne in someJobs)
+                {
+                    string JobInfo = "\n*****\n";
+                    foreach (string key in jobOne.Keys)
+                    {
+                        JobInfo += (key + ": " + jobOne[key] + "\n");
+                    }
+                    JobInfo += "*****";
+                    Console.WriteLine(JobInfo);
+                } 
+                */
+           
+
         }
     }
 }
