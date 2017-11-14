@@ -141,13 +141,16 @@ namespace TechJobsConsole
                 Console.WriteLine("{0} Results Found\n", someJobs.Count);
                 //print List of Jobs outer loop
                 foreach (Dictionary<string, string> job in someJobs)
-                
-                //print each job's details via its Key and Value
+                {
+                    //print each job's details via its Key and Value
+                    Console.WriteLine("\n*****");
                     foreach (KeyValuePair<string, string> item in job)
                     {
                         Console.WriteLine(item.Key + ":" + item.Value);
                     }
                     Console.WriteLine("\n*****");
+                }
+                    
              }
                 /*
                 foreach (Dictionary<string, string> jobOne in someJobs)
